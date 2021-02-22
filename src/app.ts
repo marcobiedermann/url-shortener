@@ -1,5 +1,6 @@
 import bodyParser from "body-parser";
 import { errors } from "celebrate";
+import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
@@ -18,6 +19,7 @@ app.use(
     extended: false,
   })
 );
+app.use(cors());
 app.use(helmet());
 app.use(
   morgan("combined", {
