@@ -4,6 +4,7 @@ import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import config from "./config";
+import errorHandler from "./middlewares/error";
 import routes from "./routes";
 import { stream } from "./utils/logger";
 
@@ -25,5 +26,6 @@ app.use(
 );
 app.use(routes);
 app.use(errors());
+app.use(errorHandler());
 
 export default app;
