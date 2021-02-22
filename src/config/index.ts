@@ -1,3 +1,10 @@
+
+import dotenv from "dotenv";
+
+dotenv.config({
+  path: ".env",
+});
+
 interface Config {
   port: number;
 }
