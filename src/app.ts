@@ -1,6 +1,7 @@
 import bodyParser from "body-parser";
 import { errors } from "celebrate";
 import express from "express";
+import helmet from "helmet";
 import config from "./config";
 import routes from "./routes";
 
@@ -14,6 +15,7 @@ app.use(
     extended: false,
   })
 );
+app.use(helmet());
 app.use(routes);
 app.use(errors());
 
