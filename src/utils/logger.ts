@@ -1,15 +1,15 @@
-import winston from "winston";
-import config from "../config";
+import winston from 'winston';
+import config from '../config';
 
 const logger = winston.createLogger({
   level: config.logger.level,
   format: winston.format.json(),
   defaultMeta: {
-    service: "url-shortener",
+    service: 'url-shortener',
   },
   transports: [
     new winston.transports.File({
-      filename: "combined.log",
+      filename: 'combined.log',
     }),
   ],
 });

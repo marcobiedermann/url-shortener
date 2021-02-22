@@ -1,11 +1,10 @@
-
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 
 dotenv.config({
-  path: ".env",
+  path: '.env',
 });
 
-type Level = "error" | "warn" | "info" | "http" | "verbose" | "debug" | "silly";
+type Level = 'error' | 'warn' | 'info' | 'http' | 'verbose' | 'debug' | 'silly';
 
 interface Logger {
   level: Level;
@@ -18,7 +17,7 @@ interface Config {
 
 const config: Config = {
   logger: {
-    level: "debug",
+    level: 'debug',
   },
   port: process.env.PORT ? parseInt(process.env.PORT, 10) : 3000,
 };

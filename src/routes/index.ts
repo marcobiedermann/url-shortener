@@ -1,8 +1,5 @@
-import { Request, Response, Router } from "express";
-import {
-  validateCreateUrl,
-  validateGetUrl,
-} from "../middlewares/validation/url";
+import { Request, Response, Router } from 'express';
+import { validateCreateUrl, validateGetUrl } from '../middlewares/validation/url';
 
 const router = Router();
 
@@ -11,8 +8,7 @@ function createUrlHandler(request: Request, response: Response) {
 
   console.log({ body });
 
-
-  response.send("POST URL");
+  response.send('POST URL');
 }
 
 function getUrlHandler(request: Request, response: Response) {
@@ -20,11 +16,11 @@ function getUrlHandler(request: Request, response: Response) {
 
   console.log({ params });
 
-  response.send("GET URL");
+  response.send('GET URL');
 }
 
-router.route("/").post(validateCreateUrl, createUrlHandler);
+router.route('/').post(validateCreateUrl, createUrlHandler);
 
-router.route("/:urlId").get(validateGetUrl, getUrlHandler);
+router.route('/:urlId').get(validateGetUrl, getUrlHandler);
 
 export default router;
