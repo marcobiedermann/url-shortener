@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import asyncHandler from 'express-async-handler';
 import { validateCreateUrl, validateGetUrl } from '../middlewares/validation/url';
 import { createUrl, getUrl } from '../services/url';
 
@@ -31,8 +32,8 @@ async function getUrlHandler(request: Request, response: Response) {
   });
 }
 
-router.route('/').post(validateCreateUrl, createUrlHandler);
+router.route('/').post(validateCreateUrl, asyncHandler(createUrlHandler));
 
-router.route('/:urlId').get(validateGetUrl, getUrlHandler);
+router.route('/:urlId').get(validateGetUrl, asyncHandler(getUrlHandler));
 
 export default router;
