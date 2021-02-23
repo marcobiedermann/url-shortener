@@ -1,22 +1,34 @@
 import { Request, Response, Router } from 'express';
 import { validateCreateUrl, validateGetUrl } from '../middlewares/validation/url';
+import { createUrl, getUrl } from '../services/url';
 
 const router = Router();
 
-function createUrlHandler(request: Request, response: Response) {
+async function createUrlHandler(request: Request, response: Response) {
   const { body } = request;
 
   console.log({ body });
 
-  response.send('POST URL');
+  const createdUrl = await createUrl();
+
+  response.json({
+    url: createdUrl,
+  });
 }
 
-function getUrlHandler(request: Request, response: Response) {
+async function getUrlHandler(request: Request, response: Response) {
   const { params } = request;
+  const { urlId } = params;
 
   console.log({ params });
 
-  response.send('GET URL');
+  const url = await getUrl({
+    id: urlId,
+  });
+
+  response.json({
+    url,
+  });
 }
 
 router.route('/').post(validateCreateUrl, createUrlHandler);
