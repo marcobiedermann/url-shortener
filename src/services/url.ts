@@ -14,6 +14,12 @@ function createUrl(values: UserCreationAttributes): Promise<Url> {
   });
 }
 
+function incrementUrlVisits(url: Url): Promise<Url> {
+  return url.increment('visits', {
+    by: 1,
+  });
+}
+
 async function getUrl(where: WhereOptions): Promise<Url> {
   const url = await Url.findOne({
     where,
@@ -24,12 +30,6 @@ async function getUrl(where: WhereOptions): Promise<Url> {
   }
 
   return incrementUrlVisits(url);
-}
-
-function incrementUrlVisits(url: Url): Promise<Url> {
-  return url.increment('visits', {
-    by: 1,
-  });
 }
 
 export { createUrl, getUrl };
