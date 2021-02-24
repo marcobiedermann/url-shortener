@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express';
 import asyncHandler from 'express-async-handler';
+import { StatusCodes } from 'http-status-codes';
 import { validateCreateUrl, validateGetUrl } from '../middlewares/validation/url';
 import { createUrl, getUrl } from '../services/url';
 
@@ -10,7 +11,7 @@ async function createUrlHandler(request: Request, response: Response) {
 
   const createdUrl = await createUrl(body);
 
-  response.json({
+  response.sendStatus(StatusCodes.CREATED).json({
     url: createdUrl,
   });
 }
@@ -23,9 +24,7 @@ async function getUrlHandler(request: Request, response: Response) {
     shortUrl,
   });
 
-  response.json({
-    url,
-  });
+  response.redirect(url.longUrl);
 }
 
 router.route('/').post(validateCreateUrl, asyncHandler(createUrlHandler));

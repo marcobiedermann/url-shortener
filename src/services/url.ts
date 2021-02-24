@@ -1,3 +1,5 @@
+import createError from 'http-errors';
+import { StatusCodes } from 'http-status-codes';
 import { nanoid } from 'nanoid';
 import { WhereOptions } from 'sequelize';
 import { Url } from '../models';
@@ -18,7 +20,7 @@ async function getUrl(where: WhereOptions): Promise<Url> {
   });
 
   if (!url) {
-    throw new Error(`URL not found`);
+    throw createError(StatusCodes.BAD_REQUEST, 'Url not found');
   }
 
   return incrementUrlVisits(url);

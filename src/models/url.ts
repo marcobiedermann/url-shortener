@@ -8,6 +8,12 @@ export interface UserCreationAttributes {
 class Url extends Model {
   public id!: string;
 
+  public longUrl!: string;
+
+  public shortUrl!: string;
+
+  public visits!: number;
+
   public readonly createdAt!: Date;
 
   public readonly updatedAt!: Date;
