@@ -1,0 +1,123 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "URL Service",
+    "description": "URL service API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/api/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "url"
+    }
+  ],
+  "paths": {
+    "/urls": {
+      "post": {
+        "summary": "Create new url",
+        "tags": ["url"],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "longUrl": {
+                    "type": "string",
+                    "format": "uri"
+                  }
+                },
+                "required": ["longUrl"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "$ref": "#/components/schemas/Url"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/urls/{shortUrl}": {
+      "get": {
+        "summary": "Get url by ID",
+        "tags": ["url"],
+        "parameters": [
+          {
+            "name": "shortUrl",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "$ref": "#/components/schemas/Url"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Url": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "longUrl": {
+            "type": "string",
+            "format": "uri"
+          },
+          "shortUrl": {
+            "type": "string"
+          },
+          "visits": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}
