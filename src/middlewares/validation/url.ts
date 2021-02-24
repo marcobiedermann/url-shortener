@@ -8,7 +8,7 @@ const validateCreateUrl = celebrate({
 
 const validateGetUrl = celebrate({
   [Segments.PARAMS]: Joi.object({
-    urlId: Joi.string().required(),
+    shortUrl: Joi.string().required(),
   }),
 });
 

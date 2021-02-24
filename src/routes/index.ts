@@ -8,9 +8,7 @@ const router = Router();
 async function createUrlHandler(request: Request, response: Response) {
   const { body } = request;
 
-  console.log({ body });
-
-  const createdUrl = await createUrl();
+  const createdUrl = await createUrl(body);
 
   response.json({
     url: createdUrl,
@@ -19,12 +17,10 @@ async function createUrlHandler(request: Request, response: Response) {
 
 async function getUrlHandler(request: Request, response: Response) {
   const { params } = request;
-  const { urlId } = params;
-
-  console.log({ params });
+  const { shortUrl } = params;
 
   const url = await getUrl({
-    id: urlId,
+    shortUrl,
   });
 
   response.json({
@@ -34,6 +30,6 @@ async function getUrlHandler(request: Request, response: Response) {
 
 router.route('/').post(validateCreateUrl, asyncHandler(createUrlHandler));
 
-router.route('/:urlId').get(validateGetUrl, asyncHandler(getUrlHandler));
+router.route('/:shortUrl').get(validateGetUrl, asyncHandler(getUrlHandler));
 
 export default router;

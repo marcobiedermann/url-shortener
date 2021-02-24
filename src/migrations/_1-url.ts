@@ -13,6 +13,16 @@ async function up(queryInterface: QueryInterface): Promise<void> {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
+    long_url: {
+      type: DataTypes.STRING,
+    },
+    short_url: {
+      type: DataTypes.STRING,
+    },
+    visits: {
+      defaultValue: 0,
+      type: DataTypes.INTEGER,
+    },
     created_at: {
       allowNull: false,
       type: DataTypes.DATE,
